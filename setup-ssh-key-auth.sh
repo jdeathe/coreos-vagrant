@@ -25,11 +25,4 @@ fi
 echo 
 echo "Your public SSH key is (${SSH_IDENTITY_FILE}.pub):"
 cat ${SSH_IDENTITY_FILE}.pub
-
-# Update the Vagrantfile with the new key
-#sed -i \
-#	-e 's/#config.ssh.private_key_path = "~\/.ssh\/id_rsa"/config.ssh.private_key_path = "~\/.ssh\/id_rsa"/g' \
-#	-e 's/#config.ssh.forward_agent = true/config.ssh.forward_agent = true/g' \
-#	Vagrantfile
-
 echo 
