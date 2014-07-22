@@ -1,0 +1,3 @@
+[submodule "packages/src/jdeathe/centos-ssh"]
+	path = packages/src/jdeathe/centos-ssh
+	url = git@github.com:jdeathe/centos-ssh.git
