@@ -5,6 +5,23 @@ require 'fileutils'
 
 Vagrant.require_version ">= 1.6.0"
 
+if !Vagrant::Util::Platform.windows?
+  unless Vagrant.has_plugin?("vagrant-hostsupdater")
+
+puts <<-EOT
+================================================================================
+The recommended plugin vagrant-hostsupdater is not installed. This will assist 
+setting up /etc/hosts entries for the guest VMs.
+
+To install run:
+vagrant plugin install vagrant-hostsupdater
+--------------------------------------------------------------------------------
+
+EOT
+
+  end
+end
+
 CLOUD_CONFIG_PATH = File.join(File.dirname(__FILE__), "user-data")
 CONFIG = File.join(File.dirname(__FILE__), "config.rb")
 
@@ -90,6 +107,15 @@ Vagrant.configure("2") do |config|
 
       ip = "172.17.8.#{i+100}"
       config.vm.network :private_network, ip: ip
+
+      # Add hosts file entries 
+      if Vagrant.has_plugin?("vagrant-hostsupdater") then
+        if i == 1
+          config.hostsupdater.aliases = [vm_name + ".local", "app-1", "app-1.local"]
+        else
+          config.hostsupdater.aliases = [vm_name + ".local"]
+        end
+      end
 
       # Uncomment below to enable NFS for sharing the host machine into the coreos-vagrant VM.
       #config.vm.synced_folder ".", "/home/core/share", id: "core", :nfs => true, :mount_options => ['nolock,vers=3,udp']
