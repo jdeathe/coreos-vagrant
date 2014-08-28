@@ -1,3 +1,9 @@
 [submodule "packages/src/jdeathe/centos-ssh"]
 	path = packages/src/jdeathe/centos-ssh
 	url = git@github.com:jdeathe/centos-ssh.git
+[submodule "packages/src/jdeathe/centos-ssh-apache-php"]
+	path = packages/src/jdeathe/centos-ssh-apache-php
+	url = git@github.com:jdeathe/centos-ssh-apache-php.git
+[submodule "packages/src/jdeathe/centos-ssh-apache-php-fcgi"]
+	path = packages/src/jdeathe/centos-ssh-apache-php-fcgi
+	url = git@github.com:jdeathe/centos-ssh-apache-php-fcgi.git
