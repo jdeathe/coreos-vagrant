@@ -7,3 +7,6 @@
 [submodule "packages/src/jdeathe/centos-ssh-apache-php-fcgi"]
 	path = packages/src/jdeathe/centos-ssh-apache-php-fcgi
 	url = git@github.com:jdeathe/centos-ssh-apache-php-fcgi.git
+[submodule "packages/src/jdeathe/centos-ssh-mysql"]
+	path = packages/src/jdeathe/centos-ssh-mysql
+	url = git@github.com:jdeathe/centos-ssh-mysql.git
