@@ -120,10 +120,13 @@ Vagrant.configure("2") do |config|
       # Uncomment below to enable NFS for sharing the host machine into the coreos-vagrant VM.
       #config.vm.synced_folder ".", "/home/core/share", id: "core", :nfs => true, :mount_options => ['nolock,vers=3,udp']
 
-      # NFS shares used for docker container volumes
       config.vm.synced_folder "./config", "/etc/services-config", id: "services-config", :nfs => true, :mount_options => ['nolock,vers=3,udp']
       config.vm.synced_folder "./packages", "/var/services-packages", id: "services-packages", :nfs => true, :mount_options => ['nolock,vers=3,udp']
-      config.vm.synced_folder "./data", "/var/services-data", id: "services-data", :nfs => true, :mount_options => ['nolock,vers=3,udp']
+      if (RUBY_PLATFORM =~ /darwin/) != nil
+        config.vm.synced_folder "./data", "/var/services-data", id: "services-data", :nfs => true, :mount_options => ["nolock","vers=3","udp"], :bsd__nfs_options => ["-maproot=0:0"]
+      else
+        config.vm.synced_folder "./data", "/var/services-data", id: "services-data", :nfs => true, :mount_options => ["nolock","vers=3","udp"], :linux__nfs_options => ["no_root_squash"]
+      end
 
       if File.exist?(CLOUD_CONFIG_PATH)
         config.vm.provision :file, :source => "#{CLOUD_CONFIG_PATH}", :destination => "/tmp/vagrantfile-user-data"
